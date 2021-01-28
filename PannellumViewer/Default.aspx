@@ -103,7 +103,7 @@
                 "showControls": false,
 
                 //debugs yaw and pitch to the debugger in the console (f12)
-                "hotSpotDebug": true,
+                "hotSpotDebug": false,
 
                 //trying to debug the yaw and pitch visually without debug console
                                 
