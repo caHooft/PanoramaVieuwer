@@ -12,6 +12,7 @@
     <script src="Script/js/pannellum.js"></script>
     <script src="Script/js/libpannellum.js"></script>
     <style>
+
         /*
         html, body
         {
@@ -19,21 +20,23 @@
             margin: 0;
         }
         */
+
         #panorama 
         {
             width: 100%; 
-            height: 80vh;
+            height: 100vh;
         }
 
         #controls 
         {
         position: absolute;
-        bottom: 0;
+        bottom: 1px;
         z-index: 2;
         text-align: center;
         width: 100%;
         padding-bottom: 5px;
-    
+            left: 9px;
+            margin-top: 0px;
         }
         .ctrl 
         {
@@ -51,10 +54,9 @@
 
         #showCoordinate 
         {
-            width: 100%;
-            margin-top: 3px;
-            height: 15vh;
-            border: 3px solid black;
+            width: 100%;            
+            height: 7.5vh;
+            border: 2px solid black;
         }
 
         </style>
@@ -73,6 +75,7 @@
     <form id="form1" runat="server">
         <div id="panorama">
             <div id="controls">
+                <div class="ctrl" id="click">&#9640;</div>
                 <div class="ctrl" id="pan-up">&#9650;</div>
                 <div class="ctrl" id="pan-down">&#9660;</div>
                 <div class="ctrl" id="pan-left">&#9664;</div>
@@ -80,16 +83,15 @@
                 <div class="ctrl" id="zoom-in">&plus;</div>
                 <div class="ctrl" id="zoom-out">&minus;</div>
                 <div class="ctrl" id="fullscreen">&#x2922;</div>
-            </div>
-        </div>
+            </div>        
 
             <div id="showCoordinate">
-                <br />
                 <label for="pitch"><strong>Pitch:</strong></label>
                 <br />
                 <br />
                 <label for="yaw"><strong>Yaw:</strong></label>
-            </div>         
+            </div> 
+        </div>        
 
         <script>
             //create viewer as variable vieuwer (this is essential for the buttons!)
@@ -139,6 +141,19 @@
 
             });
             // Make buttons work
+            document.getElementById('click').addEventListener('click', function (e)
+            {                
+                pitch = viewer.getPitch();
+                yaw = viewer.getYaw();
+                //viewer.getHfov() = fov;
+
+             
+                jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + pitch);
+                
+                jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + yaw);
+
+            });
+
             document.getElementById('pan-up').addEventListener('click', function (e) {
                 viewer.setPitch(viewer.getPitch() + 10);
             });
