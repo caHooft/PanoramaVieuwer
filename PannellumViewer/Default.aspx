@@ -140,6 +140,17 @@
                 ]
 
             });
+
+            viewer.on('mousedown', function (event)
+            {
+                // coords[0] is pitch, coords[1] is yaw
+                var coords = viewer.mouseEventToCoords(event);
+                
+                jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + coords[0]);
+
+                jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + coords[1]);
+            });
+
             // Make buttons work
             document.getElementById('click').addEventListener('click', function (e)
             {                
