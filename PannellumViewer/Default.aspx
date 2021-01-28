@@ -12,17 +12,20 @@
     <script src="Script/js/pannellum.js"></script>
     <script src="Script/js/libpannellum.js"></script>
     <style>
-        html, body {
+        html, body
+        {
             height: 100%;
             margin: 0;
         }
 
-        #panorama {
+        #panorama 
+        {
             width: 100%;
             height: 80vh;
         }
 
-        #showCoordinate {
+        #showCoordinate 
+        {
             width: 100%;
             margin-top: 3px;
             height: 15vh;
@@ -30,7 +33,8 @@
         }
     </style>
     <script>       
-        var PrintCoordinate = function (hotSpotDiv,args) {
+        var PrintCoordinate = function (hotSpotDiv, args)
+        {
             var pitch = args.pitch;
             jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + pitch);
             var yaw = args.yaw;
@@ -51,21 +55,15 @@
         <script>
             pannellum.viewer('panorama', {
                 "type": "equirectangular",
+                //Determines what picture is vieuwed
                 "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
                 autoLoad: true,
-                /*
-                 * "panorama": "https://pannellum.org/images/bma-1.jpg",
-                 * https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg
-                 * https://pannellum.org/images/bma-1.jpg
-                 * Uncomment the next line to print the coordinates of mouse clicks
-                 * to the browser's developer console, which makes it much easier
-                 * to figure out where to place hot spots. Always remove it when
-                 * finished, though.
-                 */
-                //"hotSpotDebug": true,
+                "hotSpotDebug": true,
 
-                "hotSpots": [
+                "hotSpots":
+                    [
                     {
+                        //asset data link example
                         "pitch": -14.813,
                         "yaw": -147.880,
                         "type": "info",
@@ -74,6 +72,7 @@
                     },
 
                     {
+                        //switch to diffrent panorama picture
                         "pitch": -0.247,
                         "yaw": 159.61,
                         "type": "info",
@@ -82,6 +81,7 @@
                     },
 
                     {
+                        //debug coordinate
                         "pitch": -11.709,
                         "yaw": 127.924,
                         "type": "info",
