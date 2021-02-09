@@ -14,22 +14,45 @@
     <style>
 
         /*
-        html, body
+                    html, body
         {
             height: 100%;
             margin: 0;
+        } 
+
+
+        */             
+
+        #image
+        {
+            max-width: 100%;
+            max-height: 100%;
         }
-        */
+        .row 
+        {
+          display: flex;
+        }
+
+        .column 
+        {
+          flex: 50%;
+          padding: 5px;
+        }
 
         #panorama 
+        { 
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .row 
         {
-            
-           width: 50%; 
-            
-            
+          display: flex;
+        }
 
-            margin-left: 800px;
-            height: 100vh;
+        .column 
+        {
+          flex: 50%;
+          padding: 5px;
         }
 
         #controls 
@@ -62,10 +85,19 @@
             width: 100%;            
             height: 7.5vh;
             border: 2px solid black;
+            
+        }
+
+        #showXY
+        {
+            width: 100%;            
+            height: 7.5vh;
+            border: 2px solid black;
         }
 
         </style>
-    <script>       
+    <script>    
+        //example function
         var PrintCoordinate = function (hotSpotDiv, args)
         {
             var pitch = args.pitch;
@@ -78,35 +110,59 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="panorama">
-            <div id="controls">
-                <div class="ctrl" id="click">&#9640;</div>
-                <div class="ctrl" id="pan-up">&#9650;</div>
-                <div class="ctrl" id="pan-down">&#9660;</div>
-                <div class="ctrl" id="pan-left">&#9664;</div>
-                <div class="ctrl" id="pan-right">&#9654;</div>
-                <div class="ctrl" id="zoom-in">&plus;</div>
-                <div class="ctrl" id="zoom-out">&minus;</div>
-                <div class="ctrl" id="fullscreen">&#x2922;</div>
-            </div>        
 
-            <div id="showCoordinate">
-                <label for="pitch"><strong>Pitch:</strong></label>
-                <br />
-                <br />
-                <label for="yaw"><strong>Yaw:</strong></label>
-            </div> 
-        </div>        
+        <div class="row">
+
+          <div class="column">
+              <div id="image">
+                  <div id="showXY">
+                        <label for="x"><strong>X:</strong></label>
+                        <br />
+                        <br />
+                        <label for="y"><strong>Y:</strong></label>
+                    </div> 
+                  <img src="360images/trafficSign/stream_00002-000000_00007_0000030.jpg" style="width:100%"/>
+              </div> 
+          </div>
+
+            <div class="column">
+                 <div id="panorama">
+                     <div id="showCoordinate">
+                        <label for="pitch"><strong>Pitch:</strong></label>
+                        <br />
+                        <br />
+                        <label for="yaw"><strong>Yaw:</strong></label>
+                    </div> 
+
+                    <div id="controls">
+                        <div class="ctrl" id="click">&#9640;</div>
+                        <div class="ctrl" id="pan-up">&#9650;</div>
+                        <div class="ctrl" id="pan-down">&#9660;</div>
+                        <div class="ctrl" id="pan-left">&#9664;</div>
+                        <div class="ctrl" id="pan-right">&#9654;</div>
+                        <div class="ctrl" id="zoom-in">&plus;</div>
+                        <div class="ctrl" id="zoom-out">&minus;</div>
+                        <div class="ctrl" id="fullscreen">&#x2922;</div>
+                    </div> 
+                 </div>            
+            </div>
+               
+
+        </div>      
 
         <script>
+
+            
             //create viewer as variable vieuwer (this is essential for the buttons!)
             viewer = pannellum.viewer('panorama', {
                 "type": "equirectangular",
-                //Determines what picture is vieuwed
-                //"panorama": "360images/trafficSign/Position_01_panorama.jpg",
+
+                //code that enables support for non complete panorama pictures
                 //"haov": 149.87,
                 //"vaov": 54.15,
-                //"vOffset": 1.17,                
+                //"vOffset": 1.17,     
+
+                //Determines what picture is vieuwed
                 "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
                 //"panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
                 autoLoad: true,
@@ -114,8 +170,6 @@
 
                 //debugs yaw and pitch to the debugger in the console (f12)
                 "hotSpotDebug": false,
-
-                //trying to debug the yaw and pitch visually without debug console
                                 
                 "hotSpots":
                 [
@@ -139,6 +193,7 @@
 
                     {
                         //debug coordinate
+                        //use example function
                         "pitch": -11.709,
                         "yaw": 127.924,
                         "type": "info",
@@ -175,31 +230,37 @@
 
             });
 
-            document.getElementById('pan-up').addEventListener('click', function (e) {
+            document.getElementById('pan-up').addEventListener('click', function (e)
+            {
                 viewer.setPitch(viewer.getPitch() + 10);
             });
-            document.getElementById('pan-down').addEventListener('click', function (e) {
+            document.getElementById('pan-down').addEventListener('click', function (e)
+            {
                 viewer.setPitch(viewer.getPitch() - 10);
             });
-            document.getElementById('pan-left').addEventListener('click', function (e) {
+            document.getElementById('pan-left').addEventListener('click', function (e)
+            {
                 viewer.setYaw(viewer.getYaw() - 10);
             });
-            document.getElementById('pan-right').addEventListener('click', function (e) {
+            document.getElementById('pan-right').addEventListener('click', function (e)
+            {
                 viewer.setYaw(viewer.getYaw() + 10);
             });
-            document.getElementById('zoom-in').addEventListener('click', function (e) {
+            document.getElementById('zoom-in').addEventListener('click', function (e)
+            {
                 viewer.setHfov(viewer.getHfov() - 10);
             });
-            document.getElementById('zoom-out').addEventListener('click', function (e) {
+            document.getElementById('zoom-out').addEventListener('click', function (e)
+            {
                 viewer.setHfov(viewer.getHfov() + 10);
             });
-            document.getElementById('fullscreen').addEventListener('click', function (e) {
+            document.getElementById('fullscreen').addEventListener('click', function (e)
+            {
                 viewer.toggleFullscreen();
             });
 
             
         </script>
-
-    </form>
+    </form>      
 </body>
 </html>
