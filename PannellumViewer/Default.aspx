@@ -23,7 +23,12 @@
 
         #panorama 
         {
-            width: 100%; 
+            
+           width: 50%; 
+            
+            
+
+            margin-left: 800px;
             height: 100vh;
         }
 
@@ -98,7 +103,12 @@
             viewer = pannellum.viewer('panorama', {
                 "type": "equirectangular",
                 //Determines what picture is vieuwed
-                "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
+                //"panorama": "360images/trafficSign/Position_01_panorama.jpg",
+                //"haov": 149.87,
+                //"vaov": 54.15,
+                //"vOffset": 1.17,                
+                "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
+                //"panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
                 autoLoad: true,
                 "showControls": false,
 
