@@ -173,6 +173,46 @@
                                 
                 "hotSpots":
                 [
+                    /*
+                    "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg"
+                     hotspots
+                    */
+                    {
+                        "pitch": 4,
+                        "yaw": -123,
+                        "type": "info",
+                        "text": "Cycler path",
+                        "clickHandlerFunc": PrintCoordinate,
+                        "clickHandlerArgs": { "pitch": -0.9, "yaw": -123 },
+                        "URL": ""
+                        
+                    },
+
+                    {
+                        "pitch": 0,
+                        "yaw": -90,
+                        "type": "info",
+                        "text": "Stop sign",
+                        "clickHandlerFunc": PrintCoordinate,
+                        "clickHandlerArgs": { "pitch": -4.16, "yaw": -90 },
+                        "URL": ""
+
+                    },
+
+                    {
+                        "pitch": -1,
+                        "yaw": 19,
+                        "type": "info",
+                        "text": "end of speed limit sign",
+                        "clickHandlerFunc": PrintCoordinate,
+                        "clickHandlerArgs": { "pitch": -5, "yaw": 18 },
+                        "URL": ""
+
+                    }
+
+                    /*
+                        "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg"
+                        hotspots
                     {
                         //asset data link example
                         "pitch": -14.813,
@@ -202,6 +242,7 @@
                         "clickHandlerArgs": { "pitch": -11.709, "yaw": 127.924 },
                         "URL": ""
                     }
+                    */
                 ]
 
             });
