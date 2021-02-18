@@ -13,20 +13,10 @@
     <script src="Script/js/libpannellum.js"></script>
     <style>
 
-        /*
-                    html, body
-        {
-            height: 100%;
-            margin: 0;
-        } 
-
-
-        */             
-
         #image
         {
-            max-width: 100%;
-            max-height: 100%;
+            width: 950px;
+            height: 500px;
         }
         .row 
         {
@@ -36,13 +26,12 @@
         .column 
         {
           flex: 50%;
-          padding: 5px;
         }
 
         #panorama 
         { 
-            max-width: 100%;
-            max-height: 100%;
+            width: 950px;
+            height: 525px;
         }
         .row 
         {
@@ -52,7 +41,6 @@
         .column 
         {
           flex: 50%;
-          padding: 5px;
         }
 
         #controls 
@@ -63,8 +51,8 @@
         text-align: center;
         width: 100%;
         padding-bottom: 5px;
-            left: 9px;
-            margin-top: 0px;
+        left: 9px;
+        margin-top: 0px;
         }
         .ctrl 
         {
@@ -83,27 +71,35 @@
         #showCoordinate 
         {
             width: 100%;            
-            height: 7.5vh;
-            border: 2px solid black;
+            height: 50px;
+            border: 1px solid black;
             
         }
 
         #showXY
         {
             width: 100%;            
-            height: 7.5vh;
-            border: 2px solid black;
+            height: 50px;
+            border: 1px solid black;
         }
 
         </style>
     <script>    
-        //example function
+        //Print yaw/pitch useing jQuery
         var PrintCoordinate = function (hotSpotDiv, args)
         {
             var pitch = args.pitch;
             jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + pitch);
             var yaw = args.yaw;
             jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + yaw);
+        };
+        //Print x/y useing jQuery
+        var PrintCoordinateXY = function (hotSpotDiv, args)
+        {
+            var X = args.X;
+            jQuery("label[for='X']").html("<strong>X: </strong>" + X);
+            var Y = args.Y;
+            jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
         };
 
     </script>
@@ -116,10 +112,9 @@
           <div class="column">
               <div id="image">
                   <div id="showXY">
-                        <label for="x"><strong>X:</strong></label>
+                        <label for="X"><strong>X:</strong></label>
                         <br />
-                        <br />
-                        <label for="y"><strong>Y:</strong></label>
+                        <label for="Y"><strong>Y:</strong></label>
                     </div> 
                   <img src="360images/trafficSign/stream_00002-000000_00007_0000030.jpg" style="width:100%"/>
               </div> 
@@ -129,7 +124,6 @@
                  <div id="panorama">
                      <div id="showCoordinate">
                         <label for="pitch"><strong>Pitch:</strong></label>
-                        <br />
                         <br />
                         <label for="yaw"><strong>Yaw:</strong></label>
                     </div> 
@@ -148,102 +142,135 @@
             </div>
                
 
-        </div>      
-
+        </div>    
+            <script>
+                var scalingFactor = 8.42;
+                //new script that debugs 2D image on click
+                
+                $(document).ready(function ()
+                {
+                    $('img').click(function (e)
+                    {
+                        var offset = $(this).offset();
+                        var X = (e.pageX - offset.left)*scalingFactor;
+                        var Y = (e.pageY - offset.top)*scalingFactor;
+                        jQuery("label[for='X']").html("<strong>X: </strong>" + X);
+                        jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
+                    });
+                });
+                
+                
+                //new script that debugs 2D image on hover
+                /*
+                $(document).ready(function () {
+                    $('img').on("mousemove", function (e)
+                    {
+                        var offset = $(this).offset();
+                        var X = (e.pageX - offset.left);
+                        var Y = (e.pageY - offset.top);
+                        jQuery("label[for='X']").html("<strong>X: </strong>" + X*scalingFactor);
+                        jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y*scalingFactor);
+                    });
+                });
+                */
+                
+            </script> 
+      
+        
         <script>
-
             
             //create viewer as variable vieuwer (this is essential for the buttons!)
-            viewer = pannellum.viewer('panorama', {
-                "type": "equirectangular",
+            viewer = pannellum.viewer('panorama',
+                {
+                    "type": "equirectangular",
 
-                //code that enables support for non complete panorama pictures
-                //"haov": 149.87,
-                //"vaov": 54.15,
-                //"vOffset": 1.17,     
+                    //code that enables support for non complete panorama pictures
+                    //"haov": 149.87,
+                    //"vaov": 54.15,
+                    //"vOffset": 1.17,     
 
-                //Determines what picture is vieuwed
-                "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
-                //"panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
-                autoLoad: true,
-                "showControls": false,
+                    //Determines what picture is vieuwed
+                    "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
+                    //"panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
+                    autoLoad: true,
+                    "showControls": false,
 
-                //debugs yaw and pitch to the debugger in the console (f12)
-                "hotSpotDebug": false,
+                    //debugs yaw and pitch to the debugger in the console (f12)
+                    "hotSpotDebug": false,
                                 
-                "hotSpots":
-                [
-                    /*
-                    "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg"
-                     hotspots
-                    */
-                    {
-                        "pitch": 4,
-                        "yaw": -123,
-                        "type": "info",
-                        "text": "Cycler path",
-                        "clickHandlerFunc": PrintCoordinate,
-                        "clickHandlerArgs": { "pitch": -0.9, "yaw": -123 },
-                        "URL": ""
+                    "hotSpots":
+                        [
+                        /*
+                        "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg"
+                         hotspots
+                        */
+                        {
+                            "pitch": 6,
+                            "yaw": -122,
+                            "type": "info",
+                            "text": "Cycle path",
+                            "clickHandlerFunc": PrintCoordinateXY,
+                            "clickHandlerArgs": { "X": 1257, "Y": 1881 },
+                            "URL": ""
                         
-                    },
+                        },
 
-                    {
-                        "pitch": 0,
-                        "yaw": -90,
-                        "type": "info",
-                        "text": "Stop sign",
-                        "clickHandlerFunc": PrintCoordinate,
-                        "clickHandlerArgs": { "pitch": -4.16, "yaw": -90 },
-                        "URL": ""
+                        {
+                            "pitch": 0,
+                            "yaw": -90,
+                            "type": "info",
+                            "text": "Stop sign",
+                            "clickHandlerFunc": PrintCoordinateXY,
+                            "clickHandlerArgs": { "X": 1993, "Y": 2002 },
+                            "URL": ""
 
-                    },
+                        },
 
-                    {
-                        "pitch": -1,
-                        "yaw": 19,
-                        "type": "info",
-                        "text": "end of speed limit sign",
-                        "clickHandlerFunc": PrintCoordinate,
-                        "clickHandlerArgs": { "pitch": -5, "yaw": 18 },
-                        "URL": ""
+                        {
+                            "pitch": -1,
+                            "yaw": 19,
+                            "type": "info",
+                            "text": "end of speed limit sign",
+                            "clickHandlerFunc": PrintCoordinateXY,
+                            "clickHandlerArgs": { "X": 4395, "Y": 2022 },
+                            "URL": ""
 
-                    }
+                        }
 
-                    /*
-                        "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg"
-                        hotspots
-                    {
-                        //asset data link example
-                        "pitch": -14.813,
-                        "yaw": -147.880,
-                        "type": "info",
-                        "text": "Brandblusser",
-                        "URL": "https://rd04.chalois.com/geoviewer/Components/ObjectProperties/Objectproperty.aspx?src=elements&id=BB001"
-                    },
+                        /*
+                            "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg"
+                            hotspots
+                        {
+                            //asset data link example
+                            "pitch": -14.813,
+                            "yaw": -147.880,
+                            "type": "info",
+                            "text": "Brandblusser",
+                            "URL": "https://rd04.chalois.com/geoviewer/Components/ObjectProperties/Objectproperty.aspx?src=elements&id=BB001"
+                        },
 
-                    {
-                        //switch to diffrent panorama picture
-                        "pitch": -0.247,
-                        "yaw": 159.61,
-                        "type": "info",
-                        "text": "Image Locatie",
-                        "URL": "https://rd04.chalois.com/imageviewer/Showimage.aspx?img=360images/OG13/00/IMG_20201030_154718_00_003.jpg"
-                    },
+                        {
+                            //switch to diffrent panorama picture
+                            "pitch": -0.247,
+                            "yaw": 159.61,
+                            "type": "info",
+                            "text": "Image Locatie",
+                            "URL": "https://rd04.chalois.com/imageviewer/Showimage.aspx?img=360images/OG13/00/IMG_20201030_154718_00_003.jpg"
+                        },
 
-                    {
-                        //debug coordinate
-                        //use example function
-                        "pitch": -11.709,
-                        "yaw": 127.924,
-                        "type": "info",
-                        "text": "Show coordinate",
-                        "clickHandlerFunc": PrintCoordinate,
-                        "clickHandlerArgs": { "pitch": -11.709, "yaw": 127.924 },
-                        "URL": ""
-                    }
-                    */
-                ]
+                        {
+                            //debug coordinate
+                            //use example function
+                            "pitch": -11.709,
+                            "yaw": 127.924,
+                            "type": "info",
+                            "text": "Show coordinate",
+                            "clickHandlerFunc": PrintCoordinate,
+                            "clickHandlerArgs": { "pitch": -11.709, "yaw": 127.924 },
+                            "URL": ""
+                        }
+                        */
+                    ]
 
             });
 
@@ -255,14 +282,23 @@
                 jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + coords[0]);
 
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + coords[1]);
+
+                //new debug rhing to calculate x.y from pannellum through math
+
+                //k = 8000 / coords[1];
+                //coords[0] = 4000 / k;
+
+                //X = k * (YAW + 0.5 * horiz_angle_of_view)
+                //Y = k * (PITCH + 0.5 * vert_angle_of_view)
             });
 
             // Make buttons work
             document.getElementById('click').addEventListener('click', function (e)
-            {                
+            {
+                //dead center button
                 pitch = viewer.getPitch();
-                yaw = viewer.getYaw();
-                //viewer.getHfov() = fov;
+                //yaw = viewer.getYaw();
+                viewer.getHfov() = fov;
 
              
                 jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + pitch);
@@ -270,7 +306,7 @@
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + yaw);
 
             });
-
+            
             document.getElementById('pan-up').addEventListener('click', function (e)
             {
                 viewer.setPitch(viewer.getPitch() + 10);

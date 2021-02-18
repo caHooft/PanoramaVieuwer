@@ -77,6 +77,7 @@
     <Content Include="360images\TH080\01\VID_20200201_154838_00_065 001.jpg" />
     <Content Include="360images\TrafficSign\Position_01_panorama.jpg" />
     <Content Include="360images\TrafficSign\Position_02_panorama.jpg" />
+    <Content Include="360images\TrafficSign\sprite.png" />
     <Content Include="360images\TrafficSign\stream_00002-000000_00007_0000030.jpg" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
