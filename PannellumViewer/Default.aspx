@@ -15,8 +15,8 @@
 
         #image
         {
-            width: 950px;
-            height: 500px;
+            width: 880px;
+            height: 440px;
         }
         .row 
         {
@@ -30,8 +30,8 @@
 
         #panorama 
         { 
-            width: 950px;
-            height: 525px;
+            width: 860px;
+            height: 492px;
         }
         .row 
         {
@@ -144,7 +144,8 @@
 
         </div>    
             <script>
-                var scalingFactor = 8.42;
+                //var scalingFactor = 8.42;
+                var scalingFactor = 9.1;
                 //new script that debugs 2D image on click
                 
                 $(document).ready(function ()
@@ -152,8 +153,10 @@
                     $('img').click(function (e)
                     {
                         var offset = $(this).offset();
-                        var X = (e.pageX - offset.left)*scalingFactor;
-                        var Y = (e.pageY - offset.top)*scalingFactor;
+                        var x = (e.pageX - offset.left) * scalingFactor;
+                        var y = (e.pageY - offset.top) * scalingFactor;
+                        var X = Math.round((x + Number.EPSILON) * 100) / 100;
+                        var Y = Math.round((y + Number.EPSILON) * 100) / 100;
                         jQuery("label[for='X']").html("<strong>X: </strong>" + X);
                         jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
                     });
@@ -285,11 +288,16 @@
 
                 //new debug rhing to calculate x.y from pannellum through math
 
-                //k = 8000 / coords[1];
+                var k = 8000 / 360;
+                vert_angle_of_view = 4000 / k;
                 //coords[0] = 4000 / k;
 
-                //X = k * (YAW + 0.5 * horiz_angle_of_view)
-                //Y = k * (PITCH + 0.5 * vert_angle_of_view)
+                X = k * (coords[1] + 0.5 * 360);
+                Y = k * (coords[0] + 0.5 * vert_angle_of_view);
+
+
+                jQuery("label[for='X']").html("<strong>X: </strong>" + X);
+                jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
             });
 
             // Make buttons work
