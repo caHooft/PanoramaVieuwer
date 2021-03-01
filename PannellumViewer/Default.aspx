@@ -116,10 +116,11 @@
                         <br />
                         <label for="Y"><strong>Y:</strong></label>
                     </div> 
-                  <img src="360images/trafficSign/stream_00002-000000_00007_0000030.jpg" style="width:100%"/>
+                  <!--<img src="360images/trafficSign/stream_00002-000000_00007_0000030.jpg" style="width:100%"/> !-->
+                  <img src="360images/trafficSign/stream_00002-000000_00020_0000043.jpg" style="width:100%"/>
+                  
               </div> 
           </div>
-
             <div class="column">
                  <div id="panorama">
                      <div id="showCoordinate">
@@ -140,11 +141,11 @@
                     </div> 
                  </div>            
             </div>
-               
 
         </div>    
             <script>
                 //var scalingFactor = 8.42;
+                //based on 8000 by 4000
                 var scalingFactor = 9.1;
                 //new script that debugs 2D image on click
                 
@@ -193,7 +194,7 @@
                     //"vOffset": 1.17,     
 
                     //Determines what picture is vieuwed
-                    "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
+                    "panorama": "360images/trafficSign/stream_00002-000000_00020_0000043.jpg",
                     //"panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
                     autoLoad: true,
                     "showControls": false,
@@ -206,7 +207,7 @@
                         /*
                         "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg"
                          hotspots
-                        */
+                        
                         {
                             "pitch": 6,
                             "yaw": -122,
@@ -239,7 +240,7 @@
                             "URL": ""
 
                         }
-
+                        */
                         /*
                             "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg"
                             hotspots
@@ -287,7 +288,7 @@
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + coords[1]);
 
                 //new debug rhing to calculate x.y from pannellum through math
-
+                //Y should be inverted
                 var k = 8000 / 360;
                 vert_angle_of_view = 4000 / k;
                 //coords[0] = 4000 / k;
@@ -301,6 +302,7 @@
             });
 
             // Make buttons work
+            
             document.getElementById('click').addEventListener('click', function (e)
             {
                 //dead center button
@@ -343,7 +345,7 @@
             {
                 viewer.toggleFullscreen();
             });
-
+            
             
         </script>
     </form>      

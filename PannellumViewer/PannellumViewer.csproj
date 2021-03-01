@@ -79,6 +79,7 @@
     <Content Include="360images\TrafficSign\Position_02_panorama.jpg" />
     <Content Include="360images\TrafficSign\sprite.png" />
     <Content Include="360images\TrafficSign\stream_00002-000000_00007_0000030.jpg" />
+    <Content Include="360images\TrafficSign\stream_00002-000000_00020_0000043.jpg" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\PannellumViewer.dll" />
