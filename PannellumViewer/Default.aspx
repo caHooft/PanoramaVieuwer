@@ -42,7 +42,7 @@
         {
           flex: 50%;
         }
-
+        /*
         #controls 
         {
         position: absolute;
@@ -67,7 +67,7 @@
         {
         background: rgba(200, 200, 200, 1);
         }
-
+        */
         #showCoordinate 
         {
             width: 100%;            
@@ -128,7 +128,7 @@
                         <br />
                         <label for="yaw"><strong>Yaw:</strong></label>
                     </div> 
-
+                     <!--
                     <div id="controls">
                         <div class="ctrl" id="click">&#9640;</div>
                         <div class="ctrl" id="pan-up">&#9650;</div>
@@ -139,6 +139,7 @@
                         <div class="ctrl" id="zoom-out">&minus;</div>
                         <div class="ctrl" id="fullscreen">&#x2922;</div>
                     </div> 
+                     !-->
                  </div>            
             </div>
 
@@ -288,13 +289,15 @@
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + coords[1]);
 
                 //new debug rhing to calculate x.y from pannellum through math
-                //Y should be inverted
+                
                 var k = 8000 / 360;
                 vert_angle_of_view = 4000 / k;
-                //coords[0] = 4000 / k;
 
-                X = k * (coords[1] + 0.5 * 360);
-                Y = k * (coords[0] + 0.5 * vert_angle_of_view);
+                var x = k * (coords[1] + 0.5 * 360);
+                var y = k * ((coords[0] * -1) + 0.5 * vert_angle_of_view);
+
+                var X = Math.round((x + Number.EPSILON) * 100) / 100;
+                var Y = Math.round((y + Number.EPSILON) * 100) / 100;
 
 
                 jQuery("label[for='X']").html("<strong>X: </strong>" + X);
@@ -302,7 +305,7 @@
             });
 
             // Make buttons work
-            
+            /*
             document.getElementById('click').addEventListener('click', function (e)
             {
                 //dead center button
@@ -345,7 +348,7 @@
             {
                 viewer.toggleFullscreen();
             });
-            
+            */
             
         </script>
     </form>      
