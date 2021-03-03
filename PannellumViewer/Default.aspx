@@ -42,6 +42,7 @@
         {
           flex: 50%;
         }
+
         /*
         #controls 
         {
@@ -68,6 +69,7 @@
         background: rgba(200, 200, 200, 1);
         }
         */
+
         #showCoordinate 
         {
             width: 100%;            
@@ -129,6 +131,7 @@
                         <label for="yaw"><strong>Yaw:</strong></label>
                     </div> 
                      <!--
+                         enable for buttons
                     <div id="controls">
                         <div class="ctrl" id="click">&#9640;</div>
                         <div class="ctrl" id="pan-up">&#9650;</div>
@@ -294,8 +297,11 @@
                 vert_angle_of_view = 4000 / k;
 
                 var x = k * (coords[1] + 0.5 * 360);
+                //problem might be black stuff at the botto (pannellum might auto-cut this off)
+                //if i know how much it cuts i can auto add/subtract this to fix the issue
                 var y = k * ((coords[0] * -1) + 0.5 * vert_angle_of_view);
 
+                //problem is not in anything under this comment
                 var X = Math.round((x + Number.EPSILON) * 100) / 100;
                 var Y = Math.round((y + Number.EPSILON) * 100) / 100;
 
