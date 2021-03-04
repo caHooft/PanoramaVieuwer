@@ -13,37 +13,54 @@
     <script src="Script/js/libpannellum.js"></script>
     <style>
 
-        #image
+        .Pannellum-Wrapper
         {
-            width: 880px;
-            height: 440px;
+          margin: 15px;
         }
-        .row 
-        {
-          display: flex;
+        .image
+        {             
+            
         }
-
-        .column 
-        {
-          flex: 50%;
-        }
-
-        #panorama 
+        .panorama 
         { 
-            width: 860px;
-            height: 492px;
+            
         }
         .row 
         {
           display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .row2 
+        {
+          display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
         }
 
         .column 
         {
-          flex: 50%;
+           display: flex;
+              flex-direction: column;
+              flex-basis: 100%;
+              flex: 1;
         }
+        
+        @media screen and (min-width: 800px) 
+        {
+          .column 
+          {
+            flex: 1
+          }
 
-        /*
+          .double-column 
+          {
+            flex: 2
+          }
+        }
+        
         #controls 
         {
         position: absolute;
@@ -68,7 +85,7 @@
         {
         background: rgba(200, 200, 200, 1);
         }
-        */
+        
 
         #showCoordinate 
         {
@@ -108,85 +125,90 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class='Pannellum-Wrapper'>
+            <div class="row">
 
-        <div class="row">
-
-          <div class="column">
-              <div id="image">
-                  <div id="showXY">
+                <div class="column">
+                    <div id="showXY">
                         <label for="X"><strong>X:</strong></label>
                         <br />
                         <label for="Y"><strong>Y:</strong></label>
-                    </div> 
-                  <!--<img src="360images/trafficSign/stream_00002-000000_00007_0000030.jpg" style="width:100%"/> !-->
-                  <img src="360images/trafficSign/stream_00002-000000_00020_0000043.jpg" style="width:100%"/>
-                  
-              </div> 
-          </div>
-            <div class="column">
-                 <div id="panorama">
-                     <div id="showCoordinate">
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div id="showCoordinate">
                         <label for="pitch"><strong>Pitch:</strong></label>
                         <br />
                         <label for="yaw"><strong>Yaw:</strong></label>
-                    </div> 
-                     <!--
-                         enable for buttons
-                    <div id="controls">
-                        <div class="ctrl" id="click">&#9640;</div>
-                        <div class="ctrl" id="pan-up">&#9650;</div>
-                        <div class="ctrl" id="pan-down">&#9660;</div>
-                        <div class="ctrl" id="pan-left">&#9664;</div>
-                        <div class="ctrl" id="pan-right">&#9654;</div>
-                        <div class="ctrl" id="zoom-in">&plus;</div>
-                        <div class="ctrl" id="zoom-out">&minus;</div>
-                        <div class="ctrl" id="fullscreen">&#x2922;</div>
-                    </div> 
-                     !-->
-                 </div>            
+                    </div>
+                </div>
             </div>
 
-        </div>    
-            <script>
-                //var scalingFactor = 8.42;
-                //based on 8000 by 4000
-                var scalingFactor = 9.1;
-                //new script that debugs 2D image on click
-                
-                $(document).ready(function ()
-                {
-                    $('img').click(function (e)
-                    {
-                        var offset = $(this).offset();
-                        var x = (e.pageX - offset.left) * scalingFactor;
-                        var y = (e.pageY - offset.top) * scalingFactor;
-                        var X = Math.round((x + Number.EPSILON) * 100) / 100;
-                        var Y = Math.round((y + Number.EPSILON) * 100) / 100;
-                        jQuery("label[for='X']").html("<strong>X: </strong>" + X);
-                        jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
-                    });
-                });
-                
-                
-                //new script that debugs 2D image on hover
-                /*
-                $(document).ready(function () {
-                    $('img').on("mousemove", function (e)
-                    {
-                        var offset = $(this).offset();
-                        var X = (e.pageX - offset.left);
-                        var Y = (e.pageY - offset.top);
-                        jQuery("label[for='X']").html("<strong>X: </strong>" + X*scalingFactor);
-                        jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y*scalingFactor);
-                    });
-                });
-                */
-                
-            </script> 
-      
-        
+            <div class="row2">
+
+                <div class="column">
+
+                    <div class="image">
+                        <img src="360images/trafficSign/stream_00002-000000_00020_0000043.jpg" style="width:100%;height:100%;" />
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div id="panorama">
+                        <div id="controls">
+                            <div class="ctrl" id="click">&#9640;</div>
+                            <div class="ctrl" id="pan-up">&#9650;</div>
+                            <div class="ctrl" id="pan-down">&#9660;</div>
+                            <div class="ctrl" id="pan-left">&#9664;</div>
+                            <div class="ctrl" id="pan-right">&#9654;</div>
+                            <div class="ctrl" id="zoom-in">&plus;</div>
+                            <div class="ctrl" id="zoom-out">&minus;</div>
+                            <div class="ctrl" id="fullscreen">&#x2922;</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <script>
-            
+            // script that debugs 2D image on click based on 8000 by 4000 image
+            var scalingFactorX = 8000 / form1.children[1].children[1].children[0].clientWidth;
+            var scalingFactorY = 4000 / form1.children[1].children[1].children[0].clientHeight;
+            $(document).ready(function ()
+            {
+                $('img').click(function (e)
+                {
+                    var offset = $(this).offset();
+                    var x = (e.pageX - offset.left) * scalingFactorX;
+                    var y = (e.pageY - offset.top) * scalingFactorY;
+                    var X = Math.round((x + Number.EPSILON) * 100) / 100;
+                    var Y = Math.round((y + Number.EPSILON) * 100) / 100;
+                    jQuery("label[for='X']").html("<strong>X: </strong>" + X);
+                    jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
+                });
+            });
+
+
+            //new script that debugs 2D image on hover
+            /*
+            $(document).ready(function () {
+                $('img').on("mousemove", function (e)
+                {
+                    var offset = $(this).offset();
+                    var X = (e.pageX - offset.left);
+                    var Y = (e.pageY - offset.top);
+                    jQuery("label[for='X']").html("<strong>X: </strong>" + X*scalingFactor);
+                    jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y*scalingFactor);
+                });
+            });
+            */
+
+        </script>
+
+
+        <script>
+
             //create viewer as variable vieuwer (this is essential for the buttons!)
             viewer = pannellum.viewer('panorama',
                 {
@@ -205,7 +227,7 @@
 
                     //debugs yaw and pitch to the debugger in the console (f12)
                     "hotSpotDebug": false,
-                                
+
                     "hotSpots":
                         [
                         /*
@@ -278,21 +300,20 @@
                             "URL": ""
                         }
                         */
-                    ]
+                        ]
 
-            });
+                });
 
-            viewer.on('mousedown', function (event)
-            {
+            viewer.on('mousedown', function (event) {
                 // coords[0] is pitch, coords[1] is yaw
                 var coords = viewer.mouseEventToCoords(event);
-                
+
                 jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + coords[0]);
 
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + coords[1]);
 
                 //new debug rhing to calculate x.y from pannellum through math
-                
+
                 var k = 8000 / 360;
                 vert_angle_of_view = 4000 / k;
 
@@ -310,52 +331,41 @@
                 jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
             });
 
-            // Make buttons work
-            /*
-            document.getElementById('click').addEventListener('click', function (e)
-            {
+            document.getElementById('click').addEventListener('click', function (e) {
                 //dead center button
                 pitch = viewer.getPitch();
                 //yaw = viewer.getYaw();
                 viewer.getHfov() = fov;
 
-             
+
                 jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + pitch);
-                
+
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + yaw);
 
             });
-            
-            document.getElementById('pan-up').addEventListener('click', function (e)
-            {
+
+            document.getElementById('pan-up').addEventListener('click', function (e) {
                 viewer.setPitch(viewer.getPitch() + 10);
             });
-            document.getElementById('pan-down').addEventListener('click', function (e)
-            {
+            document.getElementById('pan-down').addEventListener('click', function (e) {
                 viewer.setPitch(viewer.getPitch() - 10);
             });
-            document.getElementById('pan-left').addEventListener('click', function (e)
-            {
+            document.getElementById('pan-left').addEventListener('click', function (e) {
                 viewer.setYaw(viewer.getYaw() - 10);
             });
-            document.getElementById('pan-right').addEventListener('click', function (e)
-            {
+            document.getElementById('pan-right').addEventListener('click', function (e) {
                 viewer.setYaw(viewer.getYaw() + 10);
             });
-            document.getElementById('zoom-in').addEventListener('click', function (e)
-            {
+            document.getElementById('zoom-in').addEventListener('click', function (e) {
                 viewer.setHfov(viewer.getHfov() - 10);
             });
-            document.getElementById('zoom-out').addEventListener('click', function (e)
-            {
+            document.getElementById('zoom-out').addEventListener('click', function (e) {
                 viewer.setHfov(viewer.getHfov() + 10);
             });
-            document.getElementById('fullscreen').addEventListener('click', function (e)
-            {
+            document.getElementById('fullscreen').addEventListener('click', function (e) {
                 viewer.toggleFullscreen();
             });
-            */
-            
+
         </script>
     </form>      
 </body>
