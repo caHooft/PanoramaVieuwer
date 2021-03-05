@@ -182,10 +182,25 @@
                     var offset = $(this).offset();
                     var x = (e.pageX - offset.left) * (origonalImageX / form1.children[1].children[1].children[0].clientWidth);
                     var y = (e.pageY - offset.top) * (origonalImageY / form1.children[1].children[1].children[0].clientHeight);
+                   
                     var X = Math.round((x + Number.EPSILON) * 100) / 100;
                     var Y = Math.round((y + Number.EPSILON) * 100) / 100;
                     jQuery("label[for='X']").html("<strong>X: </strong>" + X);
                     jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
+
+                    var k = origonalImageX / 360;
+                    vert_angle_of_view = origonalImageY / k;
+
+                    yaw = (k * -180 + x) / k;
+                    pitch = (0.5 * k * vert_angle_of_view - y) / k
+
+                    var Pitch = Math.round((pitch + Number.EPSILON) * 100) / 100;
+                    var Yaw = Math.round((yaw + Number.EPSILON) * 100) / 100;
+
+                    jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + Pitch);
+                    jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + Yaw);
+                    
+                    
                 });
             });
 
@@ -304,7 +319,8 @@
 
                 });
 
-            viewer.on('mousedown', function (event) {
+            viewer.on('mousedown', function (event)
+            {
                 // coords[0] is pitch, coords[1] is yaw
                 var coords = viewer.mouseEventToCoords(event);
 
@@ -318,14 +334,11 @@
                 vert_angle_of_view = 4000 / k;
 
                 var x = k * (coords[1] + 0.5 * 360);
-                //problem might be black stuff at the botto (pannellum might auto-cut this off)
-                //if i know how much it cuts i can auto add/subtract this to fix the issue
                 var y = k * ((coords[0] * -1) + 0.5 * vert_angle_of_view);
 
                 //problem is not in anything under this comment
                 var X = Math.round((x + Number.EPSILON) * 100) / 100;
                 var Y = Math.round((y + Number.EPSILON) * 100) / 100;
-
 
                 jQuery("label[for='X']").html("<strong>X: </strong>" + X);
                 jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
