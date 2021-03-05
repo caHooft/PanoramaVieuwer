@@ -63,27 +63,27 @@
         
         #controls 
         {
-        position: absolute;
-        bottom: 1px;
-        z-index: 2;
-        text-align: center;
-        width: 100%;
-        padding-bottom: 5px;
-        left: 9px;
-        margin-top: 0px;
+            position: absolute;
+            bottom: 1px;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 5px;
+            left: 9px;
+            margin-top: 0px;
         }
         .ctrl 
         {
-        padding: 8px 5px;
-        width: 30px;
-        text-align: center;
-        background: rgba(200, 200, 200, 0.8);
-        display: inline-block;
-        cursor: pointer;
+            padding: 8px 5px;
+            width: 30px;
+            text-align: center;
+            background: rgba(200, 200, 200, 0.8);
+            display: inline-block;
+            cursor: pointer;
         }
         .ctrl:hover 
         {
-        background: rgba(200, 200, 200, 1);
+            background: rgba(200, 200, 200, 1);
         }
         
 
@@ -173,15 +173,15 @@
         </div>
         <script>
             // script that debugs 2D image on click based on 8000 by 4000 image
-            var scalingFactorX = 8000 / form1.children[1].children[1].children[0].clientWidth;
-            var scalingFactorY = 4000 / form1.children[1].children[1].children[0].clientHeight;
+            var origonalImageX = 8000;
+            var origonalImageY = 4000;
             $(document).ready(function ()
             {
                 $('img').click(function (e)
                 {
                     var offset = $(this).offset();
-                    var x = (e.pageX - offset.left) * scalingFactorX;
-                    var y = (e.pageY - offset.top) * scalingFactorY;
+                    var x = (e.pageX - offset.left) * (origonalImageX / form1.children[1].children[1].children[0].clientWidth);
+                    var y = (e.pageY - offset.top) * (origonalImageY / form1.children[1].children[1].children[0].clientHeight);
                     var X = Math.round((x + Number.EPSILON) * 100) / 100;
                     var Y = Math.round((y + Number.EPSILON) * 100) / 100;
                     jQuery("label[for='X']").html("<strong>X: </strong>" + X);
