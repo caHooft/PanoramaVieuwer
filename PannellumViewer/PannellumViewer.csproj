@@ -68,13 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="360images\QG13\00\IMG_20200103_122425_00_054.jpg" />
-    <Content Include="360images\QG13\00\IMG_20201030_154626_00_002.jpg" />
-    <Content Include="360images\QG13\01\IMG_20200103_122425_00_054.jpg" />
-    <Content Include="360images\QG13\01\VID_20200201_154838_00_065 001.jpg" />
-    <Content Include="360images\TH080\00\VID_20200201_154838_00_065 001.jpg" />
-    <Content Include="360images\TH080\00\VID_20200201_154838_00_065_081.jpg" />
-    <Content Include="360images\TH080\01\VID_20200201_154838_00_065 001.jpg" />
     <Content Include="360images\TrafficSign\Position_01_panorama.jpg" />
     <Content Include="360images\TrafficSign\Position_02_panorama.jpg" />
     <Content Include="360images\TrafficSign\sprite.png" />

@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -157,7 +156,6 @@
                 <div class="column">
                     <div id="panorama">
                         <div id="controls">
-                            <div class="ctrl" id="click">&#9640;</div>
                             <div class="ctrl" id="pan-up">&#9650;</div>
                             <div class="ctrl" id="pan-down">&#9660;</div>
                             <div class="ctrl" id="pan-left">&#9664;</div>
@@ -223,102 +221,56 @@
 
 
         <script>
+           viewer = pannellum.viewer('panorama', 
+                {   
+                    "default": 
+                        {
+                            "firstScene": "circle",
+                            "author": "HawarIT",
+                            "sceneFadeDuration": 1000,
+                            autoLoad: true,
+                            "showControls": false
+                            
+                         },
 
-            //create viewer as variable vieuwer (this is essential for the buttons!)
-            viewer = pannellum.viewer('panorama',
+                "scenes": 
                 {
-                    "type": "equirectangular",
-
-                    //code that enables support for non complete panorama pictures
-                    //"haov": 149.87,
-                    //"vaov": 54.15,
-                    //"vOffset": 1.17,     
-
-                    //Determines what picture is vieuwed
-                    "panorama": "360images/trafficSign/stream_00002-000000_00020_0000043.jpg",
-                    //"panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg",
-                    autoLoad: true,
-                    "showControls": false,
-
-                    //debugs yaw and pitch to the debugger in the console (f12)
-                    "hotSpotDebug": false,
-
-                    "hotSpots":
-                        [
-                        /*
-                        "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg"
-                         hotspots
-                        
+                    "circle": 
                         {
-                            "pitch": 6,
-                            "yaw": -122,
-                            "type": "info",
-                            "text": "Cycle path",
-                            "clickHandlerFunc": PrintCoordinateXY,
-                            "clickHandlerArgs": { "X": 1257, "Y": 1881 },
-                            "URL": ""
-                        
+                        "title": "Tilburg 1",
+                        "type": "equirectangular",
+                        "panorama": "360images/trafficSign/stream_00002-000000_00020_0000043.jpg",
+                        "hotSpots": 
+                            [
+                                {
+                                    "pitch": 0,
+                                    "yaw": 0,
+                                    "type": "scene",
+                                    "text": "Tilburg 2",
+                                    "sceneId": "house"
+                                }
+                            ]
                         },
 
+                    "house": 
                         {
-                            "pitch": 0,
-                            "yaw": -90,
-                            "type": "info",
-                            "text": "Stop sign",
-                            "clickHandlerFunc": PrintCoordinateXY,
-                            "clickHandlerArgs": { "X": 1993, "Y": 2002 },
-                            "URL": ""
-
-                        },
-
-                        {
-                            "pitch": -1,
-                            "yaw": 19,
-                            "type": "info",
-                            "text": "end of speed limit sign",
-                            "clickHandlerFunc": PrintCoordinateXY,
-                            "clickHandlerArgs": { "X": 4395, "Y": 2022 },
-                            "URL": ""
-
+                        "title": "Tilburg 2",
+                        "type": "equirectangular",
+                        "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
+                        "hotSpots":
+                            [
+                                {
+                                    "pitch": 0,
+                                    "yaw": 0,
+                                    "type": "scene",
+                                    "text": "Tilburg 1",
+                                    "sceneId": "circle",
+                                }
+                            ]
                         }
-                        */
-                        /*
-                            "panorama": "360images/QG13/00/IMG_20201030_154626_00_002.jpg"
-                            hotspots
-                        {
-                            //asset data link example
-                            "pitch": -14.813,
-                            "yaw": -147.880,
-                            "type": "info",
-                            "text": "Brandblusser",
-                            "URL": "https://rd04.chalois.com/geoviewer/Components/ObjectProperties/Objectproperty.aspx?src=elements&id=BB001"
-                        },
-
-                        {
-                            //switch to diffrent panorama picture
-                            "pitch": -0.247,
-                            "yaw": 159.61,
-                            "type": "info",
-                            "text": "Image Locatie",
-                            "URL": "https://rd04.chalois.com/imageviewer/Showimage.aspx?img=360images/OG13/00/IMG_20201030_154718_00_003.jpg"
-                        },
-
-                        {
-                            //debug coordinate
-                            //use example function
-                            "pitch": -11.709,
-                            "yaw": 127.924,
-                            "type": "info",
-                            "text": "Show coordinate",
-                            "clickHandlerFunc": PrintCoordinate,
-                            "clickHandlerArgs": { "pitch": -11.709, "yaw": 127.924 },
-                            "URL": ""
-                        }
-                        */
-                        ]
+                }           
 
                 });
-
             viewer.on('mousedown', function (event)
             {
                 // coords[0] is pitch, coords[1] is yaw
@@ -328,9 +280,9 @@
 
                 jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + coords[1]);
 
-                //new debug rhing to calculate x.y from pannellum through math
-
+                //debug to calculate x.y from pannellum through math
                 var k = 8000 / 360;
+
                 vert_angle_of_view = 4000 / k;
 
                 var x = k * (coords[1] + 0.5 * 360);
@@ -344,38 +296,32 @@
                 jQuery("label[for='Y']").html("<strong>Y: </strong>" + Y);
             });
 
-            document.getElementById('click').addEventListener('click', function (e) {
-                //dead center button
-                pitch = viewer.getPitch();
-                //yaw = viewer.getYaw();
-                viewer.getHfov() = fov;
-
-
-                jQuery("label[for='pitch']").html("<strong>Pitch: </strong>" + pitch);
-
-                jQuery("label[for='yaw']").html("<strong>Yaw: </strong>" + yaw);
-
-            });
-
-            document.getElementById('pan-up').addEventListener('click', function (e) {
+            document.getElementById('pan-up').addEventListener('click', function (e)
+            {
                 viewer.setPitch(viewer.getPitch() + 10);
             });
-            document.getElementById('pan-down').addEventListener('click', function (e) {
+            document.getElementById('pan-down').addEventListener('click', function (e)
+            {
                 viewer.setPitch(viewer.getPitch() - 10);
             });
-            document.getElementById('pan-left').addEventListener('click', function (e) {
+            document.getElementById('pan-left').addEventListener('click', function (e)
+            {
                 viewer.setYaw(viewer.getYaw() - 10);
             });
-            document.getElementById('pan-right').addEventListener('click', function (e) {
+            document.getElementById('pan-right').addEventListener('click', function (e)
+            {
                 viewer.setYaw(viewer.getYaw() + 10);
             });
-            document.getElementById('zoom-in').addEventListener('click', function (e) {
+            document.getElementById('zoom-in').addEventListener('click', function (e)
+            {
                 viewer.setHfov(viewer.getHfov() - 10);
             });
-            document.getElementById('zoom-out').addEventListener('click', function (e) {
+            document.getElementById('zoom-out').addEventListener('click', function (e)
+            {
                 viewer.setHfov(viewer.getHfov() + 10);
             });
-            document.getElementById('fullscreen').addEventListener('click', function (e) {
+            document.getElementById('fullscreen').addEventListener('click', function (e)
+            {
                 viewer.toggleFullscreen();
             });
 
