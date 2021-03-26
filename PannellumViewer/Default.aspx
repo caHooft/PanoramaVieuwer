@@ -225,7 +225,7 @@
                 {   
                     "default": 
                         {
-                            "firstScene": "circle",
+                            "firstScene": "First",
                             "author": "HawarIT",
                             "sceneFadeDuration": 1000,
                             autoLoad: true,
@@ -235,7 +235,7 @@
 
                 "scenes": 
                 {
-                    "circle": 
+                    "First":
                         {
                         "title": "Tilburg 1",
                         "type": "equirectangular",
@@ -247,12 +247,12 @@
                                     "yaw": 0,
                                     "type": "scene",
                                     "text": "Tilburg 2",
-                                    "sceneId": "house"
+                                    "sceneId": "Second"
                                 }
                             ]
                         },
 
-                    "house": 
+                    "Second": 
                         {
                         "title": "Tilburg 2",
                         "type": "equirectangular",
@@ -264,7 +264,7 @@
                                     "yaw": 0,
                                     "type": "scene",
                                     "text": "Tilburg 1",
-                                    "sceneId": "circle",
+                                    "sceneId": "First",
                                 }
                             ]
                         }
