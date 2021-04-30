@@ -15,6 +15,7 @@
         .Pannellum-Wrapper
         {
           margin: 15px;
+
         }
         .image
         {             
@@ -221,56 +222,67 @@
 
 
         <script>
-           viewer = pannellum.viewer('panorama', 
-                {   
-                    "default": 
-                        {
-                            "firstScene": "First",
-                            "author": "HawarIT",
-                            "sceneFadeDuration": 1000,
-                            autoLoad: true,
-                            "showControls": false
+            viewer = pannellum.viewer('panorama', 
+            {
+                "default": 
+                {
+                        "firstScene": "First",
+                        "author": "HawarIT",
+                        "sceneFadeDuration": 1000,
+                        autoLoad: true,
+                        "showControls": false
                             
-                         },
-
+                },
                 "scenes": 
                 {
-                    "First":
+                        "First":
                         {
                         "title": "Tilburg 1",
                         "type": "equirectangular",
                         "panorama": "360images/trafficSign/stream_00002-000000_00020_0000043.jpg",
                         "hotSpots": 
-                            [
-                                {
-                                    "pitch": 0,
-                                    "yaw": 0,
-                                    "type": "scene",
-                                    "text": "Tilburg 2",
-                                    "sceneId": "Second"
-                                }
-                            ]
+                        [{
+                                "pitch": 0,
+                                "yaw": 0,
+                                "type": "scene",
+                                "text": "Tilburg 2",
+                                "sceneId": "Second"
                         },
+                        {
+                            "pitch": -37,
+                            "yaw": -178,
+                            "type": "info",
+                            "text": "extreme pitch and yaw example (car)"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -178,
+                            "type": "info",
+                            "text": "extreme yaw example (roundabout)"
+                        },
+                        {
+                            "pitch": -54,
+                            "yaw": 0,
+                            "type": "info",
+                            "text": "extreme pitch example (car)"
+                        }
+                        ]},
 
-                    "Second": 
+                        "Second": 
                         {
                         "title": "Tilburg 2",
                         "type": "equirectangular",
                         "panorama": "360images/trafficSign/stream_00002-000000_00007_0000030.jpg",
                         "hotSpots":
-                            [
-                                {
-                                    "pitch": 0,
-                                    "yaw": 0,
-                                    "type": "scene",
-                                    "text": "Tilburg 1",
-                                    "sceneId": "First",
-                                }
-                            ]
-                        }
-                }           
-
-                });
+                        [{
+                                "pitch": 0,
+                                "yaw": 0,
+                                "type": "scene",
+                                "text": "Tilburg 1",
+                                "sceneId": "First",
+                        }]}
+                }
+            });
             viewer.on('mousedown', function (event)
             {
                 // coords[0] is pitch, coords[1] is yaw
